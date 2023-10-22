@@ -1,0 +1,16 @@
+Users:
+mercury: rocky
+venus: rocky
+earth: rocky
+moon: rocky
+asteroidbelt: rocky
+pluto: rocky
+kuiperbelt: rocky
+jupiter: gas
+saturn: gas
+uranus: gas
+neptune: gas
+Admins:
+sun
+jupiter
+earth

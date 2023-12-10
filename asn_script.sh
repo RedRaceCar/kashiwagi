@@ -1159,36 +1159,6 @@ sudo sed -i 's#//\s*\(.*APT::Periodic::Download-Upgradeable-Packages.*\)#\1#' /e
 sudo sed -i 's#//\s*\(.*APT::Periodic::AutocleanInterval.*\)#\1#' /etc/apt/apt.conf.d/10periodic
 sudo sed -i 's#//\s*\(.*APT::Periodic::Unattended-Upgrade.*\)#\1#' /etc/apt/apt.conf.d/10periodic
 
-echo "Setting Firefox as the default browser"
-
-# Set Firefox as the default browser
-sudo update-alternatives --set x-www-browser /usr/bin/firefox
-
-echo "Configuring Firefox Settings"
-
-# Download user.js from GitHub
-wget -q -O - https://raw.githubusercontent.com/pyllyukko/user.js/master/user.js > user.js
-
-# Parse user.js and write syspref.js
-while read line
-do
-  # Ignore comments and empty lines
-  if [[ $line == \#* ]] || [[ -z $line ]]; then
-    continue
-  fi
-
-  # Replace 'user_pref(' with 'pref(' and write to syspref.js
-  echo "${line/user_pref(/pref(}" >> /etc/firefox/syspref.js
-done < user.js
-
-# Remove temporary user.js file
-rm user.js
-
-# Restart Firefox
-killall firefox > /dev/null
-
-echo "Firefox Configured"
-
 echo "Configuring auditd"
 
 # Enable auditd
